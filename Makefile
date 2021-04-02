@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/10 17:29:25 by kaye              #+#    #+#              #
-#    Updated: 2021/03/12 18:39:58 by kaye             ###   ########.fr        #
+#    Updated: 2021/04/02 16:38:13 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@
 
 NA		= nasm
 NAFLAG	= -f macho64
+CC		= clang
+CFLAG	= -Wall -Wextra -Werror
+IFLAG	= -I./inc
 
 # DIRECTORIES
 
@@ -21,22 +24,64 @@ BUILD		:= .build
 INC_DIR		:= inc
 SRC_DIR		:= src
 OBJ_DIR		:= $(BUILD)/obj
-DIRS		:= $(OBJ_DIR)
+DIR			:= $(OBJ_DIR)
 
 # FILES
 
-NAME	:= libasm.a
+NAME		:= libasm.a
+MAIN		:= main_test_exec
+MAIN_SRC	:= main.c
+SRC			:= ft_strlen.s \
+			   ft_strcpy.s \
+			   ft_strcmp.s \
+			   ft_write.s \
+			   ft_read.s \
+			   ft_strdup.s
+OBJ			:= $(SRC:%.s=$(OBJ_DIR)/%.o)
+
+# COLORS
+
+DEFAULT_COLOR	= \033[0m
+BLACK_COLOR		= \033[1;30m
+RED_COLOR		= \033[1;31m
+GREEN_COLOR		= \033[1;32m
+YELLOW_COLOR	= \033[1;33m
+BLUE_COLOR		= \033[1;34m
+MAGENTA_COLOR 	= \033[1;35m
+CYAN_COLOR 		= \033[1;36m
+WHITE_COLOR 	= \033[1;107m
 
 # MAKEFILE
 
-$(NAME) : 
+$(NAME): $(OBJ)
+	@echo "Creating $(RED_COLOR) $@ $(DEFAULT_COLOR)..."
+	@ar -rcs $@ $^
+	@echo "$(GREEN_COLOR)Compilation $(YELLOW_COLOR)of $(RED_COLOR)$@ $(BLUE_COLOR)done$(DEFAULT_COLOR)"
 
-all : $(NAME)
+$(MAIN): $(NAME)
+	@echo "Creating $(RED_COLOR) $@ $(DEFAULT_COLOR)..."
+	@$(CC) $(CFLAG) $(IFLAG) src/$(MAIN_SRC) $(NAME) -o $@
+	@echo "$(GREEN_COLOR)Compilation $(YELLOW_COLOR)of $(RED_COLOR)$@ $(BLUE_COLOR)done$(DEFAULT_COLOR)"
 
-clean :
+all: $(NAME)
 
-fclean : clean
+test: $(MAIN)
 
-re : fclean all
+clean:
+	rm -Rf $(BUILD)
+
+fclean: clean
+	rm -Rf $(NAME)
+	rm -Rf $(MAIN)
+
+re: fclean all
+
+$(BUILD):
+	@echo "Creating $(RED_COLOR)$@ $(DEFAULT_COLOR)..."
+	@mkdir $@ $(DIR)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.s | $(BUILD)
+	@echo "Compiling $(CYAN_COLOR)$< $(DEFAULT_COLOR)..."
+	$(NA) $(NAFLAG) $< -o $@
 
 .PHONY : all clean fclean re
