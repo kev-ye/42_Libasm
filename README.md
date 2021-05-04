@@ -25,8 +25,13 @@ The aim of this project is to get familiar with assembly language.
 [__Original__](https://www.codenong.com/cs109851814/)
 
 * [Memory Data Register](#Memory_Data_Register) : AX, BX, CX, DX  
+<<<<<<< HEAD
 	* [High H & low L](#High_H_and_low_L) : AH, BH, CH, DH & AL, BL, CL, DL  
 	* [32bit & 64bit](#32bit_and_64bit) : EAX, EBX, ECX, EDX & RAX, RBX, RCX, RDX  
+=======
+	* [High H & low L](#High_H_low_L) : AH, BH, CH, DH & AL, BL, CL, DL  
+	* [32bit & 64bit](#32bit_64bit) : EAX, EBX, ECX, EDX & RAX, RBX, RCX, RDX  
+>>>>>>> ced981dccd8e6971eb3c4b2dac76657def5ace7b
 * [Segment Register](#Segment_Register) : CS, DS, SS, ES, FS ,GS
 * [Pointer Register](#Pointer_Register) : IP, SP, BP
 	* 32bit : EIP, ESP, EBP
@@ -49,7 +54,11 @@ The aim of this project is to get familiar with assembly language.
 >DX (Data)
 >> Usually used to store data, and occasionally it forms an operand with AX when multiplying and dividing large numbers.
 
+<<<<<<< HEAD
 #### High_H_and_low_L
+=======
+#### High_H_low_L
+>>>>>>> ced981dccd8e6971eb3c4b2dac76657def5ace7b
 	The four 16-bit registers can be split in to high 8-bits and low 8-bits, namely AH, BH, CH and AL, BL, CL, DL.
 	
 	these 8 registers are not new registers, but take part of the contents of the corresponding 16-bit registers. Take the actual storage situation of AX as an example.
@@ -60,7 +69,11 @@ The aim of this project is to get familiar with assembly language.
 	 |                       |                       |
 	 |---> AH (HH 8-bit) <---|---> AL (LW 8-bit) <---|
 
+<<<<<<< HEAD
 #### 32bit_and_64bit
+=======
+#### 32bit_64bit
+>>>>>>> ced981dccd8e6971eb3c4b2dac76657def5ace7b
 	At the same time, NASM also supports us to write 32-bit or 64-bit general register size, which are EAX, EBX, ECX, EDX and RAX, RBX, RCX, RDX.
 
 	For example, the original AX is the lower 16-bit of EAX as follows.
