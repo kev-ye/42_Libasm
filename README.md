@@ -3,7 +3,7 @@
 ## __Index__
 
 * [Presentation](#Presentation)
-* [To do list](To_do_list)
+* [To do list](#To_do_list)
 * [Register](#Register)
 * [Syscall](#Syscall)
 * [NASM command](#NASM_command)
@@ -60,7 +60,7 @@ The aim of this project is to get familiar with assembly language.
 	 |                       |                       |
 	 |---> AH (HH 8-bit) <---|---> AL (LW 8-bit) <---|
 
-#### High_H_&_low_L
+#### 32bit_&_64bit
 	At the same time, NASM also supports us to write 32-bit or 64-bit general register size, which are EAX, EBX, ECX, EDX and RAX, RBX, RCX, RDX.
 
 	For example, the original AX is the lower 16-bit of EAX as follows.
