@@ -25,8 +25,8 @@ The aim of this project is to get familiar with assembly language.
 [__Original__](https://www.codenong.com/cs109851814/)
 
 * [Memory Data Register](#Memory_Data_Register) : AX, BX, CX, DX  
-	* [High H & low L](###High_H_&_low_L) : AH, BH, CH, DH & AL, BL, CL, DL  
-	* [32bit & 64bit](###32bit_&_64bit) : EAX, EBX, ECX, EDX & RAX, RBX, RCX, RDX  
+	* [High H & low L](####High_H_&_low_L) : AH, BH, CH, DH & AL, BL, CL, DL  
+	* [32bit & 64bit](####32bit_&_64bit) : EAX, EBX, ECX, EDX & RAX, RBX, RCX, RDX  
 * [Segment Register](#Segment_Register) : CS, DS, SS, ES, FS ,GS
 * [Pointer Register](#Pointer_Register) : IP, SP, BP
 	* 32bit : EIP, ESP, EBP
