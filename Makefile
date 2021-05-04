@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/10 17:29:25 by kaye              #+#    #+#              #
-#    Updated: 2021/04/02 16:38:13 by kaye             ###   ########.fr        #
+#    Updated: 2021/05/02 18:53:58 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ $(NAME): $(OBJ)
 
 $(MAIN): $(NAME)
 	@echo "Creating $(RED_COLOR) $@ $(DEFAULT_COLOR)..."
-	@$(CC) $(CFLAG) $(IFLAG) src/$(MAIN_SRC) $(NAME) -o $@
+	@$(CC) $(CFLAG) $(IFLAG) $(MAIN_SRC) $(NAME) -o $@
 	@echo "$(GREEN_COLOR)Compilation $(YELLOW_COLOR)of $(RED_COLOR)$@ $(BLUE_COLOR)done$(DEFAULT_COLOR)"
 
 all: $(NAME)

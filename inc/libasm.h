@@ -4,6 +4,8 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <errno.h>
+# include <string.h>
+# include <fcntl.h>
 
 size_t	ft_strlen(const char *s);
 char	*ft_strcpy(char * dst, const char * src);
