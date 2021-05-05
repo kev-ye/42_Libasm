@@ -32,18 +32,18 @@ _ft_strcmp:
 	xor rcx, rcx			; init rcx
 
 _loop:
-	mov al, byte[rdi]		; char = *s1
-	cmp al, byte[rsi]		; char ? *s2
-	jne _return				; *s1 != *s2 -> _return
-	cmp byte[rdi], 0		; *s1 ? '\0'
-	jz _return				; *s1 == '\0' -> _return
-	cmp byte[rsi], 0		; *s2 ? '\0'
-	jz _return				; *s2 == '\0' -> _return
+	mov al, byte[rdi]		; char1 = *s1
+	mov cl, byte[rsi]		; char2 = *s2 
+	cmp al, cl				; char1 ? char2
+	jne _return				; char1 != char2 -> _return
+	cmp al, 0				; char1 ? '\0'
+	jz _return				; char1 == '\0' -> _return
+	cmp cl, 0				; char2 ? '\0'
+	jz _return				; char2 == '\0' -> _return
 	inc rdi					; s1++
 	inc rsi					; s2++
 	jmp _loop				; loop
 
 _return:
-	movzx ecx, byte[rsi]	; int2 = *s2
-	sub eax, ecx			; int = int - int2
-	ret						; return int
+	sub eax, ecx			; int1 = int1 - int2
+	ret						; return int1
