@@ -55,10 +55,10 @@ The aim of this project is to get familiar with assembly language.
 	these 8 registers are not new registers, but take part of the contents of the corresponding 16-bit registers. Take the actual storage situation of AX as an example.
 
 	HIGH-------------> AX (16-bit) <---------------LOW
-	 |                       |                       |
-	 |15|  |  |  |  |  |  | 8| 7|  |  |  |  |  |  | 0|
-	 |                       |                       |
-	 |---> AH (HH 8-bit) <---|---> AL (LW 8-bit) <---|
+	|                       |                       |
+	|15|  |  |  |  |  |  | 8| 7|  |  |  |  |  |  | 0|
+	|                       |                       |
+	|---> AH (HH 8-bit) <---|---> AL (LW 8-bit) <---|
 
 #### 32bit_and_64bit
 	At the same time, NASM also supports us to write 32-bit or 64-bit general register size, which are EAX, EBX, ECX, EDX and RAX, RBX, RCX, RDX.

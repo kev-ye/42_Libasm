@@ -1,34 +1,49 @@
-; int		ft_strcmp(const char *s1, const char *s2);
+;	NASM x86_64b
 ;
-; %rax result register
-; %rbx miscellaneous register
-; %rcx fourth argument register
-; %rdx third argument register
-; %rsi second argument register
-; %rdi first argument register
-; %rsp stack pointer
-; %rbp frame pointer
+;	rax : result register
+;	rbx : miscellaneous register
+;	rcx : fourth argument register
+;	rdx : third argument register
+;	rsi : second argument register
+;	rdi : first argument register
+;	rsp : stack pointer
+;	rbp : frame pointer
+;
+;	|---------------> RAX (16-bit) <-----------------|
+;	|                        |--------> EAX <--------|
+;	|          63~32         |   31~16   |    15~0   |
+;	|                                    |---> AX <--|
+;
+;	HIGH-------------> AX (16-bit) <---------------LOW
+;	|                       |                       |
+;	|15|  |  |  |  |  |  | 8| 7|  |  |  |  |  |  | 0|
+;	|                       |                       |
+;	|---> AH (HH 8-bit) <---|---> AL (LW 8-bit) <---|
+;
+;
+; int		ft_strcmp(const char *s1, const char *s2);
 
-section .text
+section .text				; code
 
-global _ft_strcmp
+global _ft_strcmp			; function name ft_strcmp
 
 _ft_strcmp:
-	xor rax, rax
+	xor rax, rax			; init rax
+	xor rcx, rcx			; init rcx
 
 _loop:
-	mov cl, byte[rdi]
-	cmp cl, byte[rsi]
-	jne _return
-	cmp byte[rdi], 0
-	jz _return
-	cmp byte[rsi], 0
-	jz _return
-	inc rdi
-	inc rsi
-	jmp _loop
+	mov al, byte[rdi]		; char = *s1
+	cmp al, byte[rsi]		; char ? *s2
+	jne _return				; *s1 != *s2 -> _return
+	cmp byte[rdi], 0		; *s1 ? '\0'
+	jz _return				; *s1 == '\0' -> _return
+	cmp byte[rsi], 0		; *s2 ? '\0'
+	jz _return				; *s2 == '\0' -> _return
+	inc rdi					; s1++
+	inc rsi					; s2++
+	jmp _loop				; loop
 
 _return:
-	mov al, cl
-	sub al, byte[rsi]
-	ret
+	movzx ecx, byte[rsi]	; int2 = *s2
+	sub eax, ecx			; int = int - int2
+	ret						; return int
