@@ -17,7 +17,7 @@ _ft_strlen:
 	mov	rax, rdi		; tmp = str
 
 _loop:
-	cmp	byte[rax], 0	; if tmp == '\0'
+	cmp	byte[rax], 0	; if *tmp == '\0'
 	jz	_return			; jump to _return if true
 	inc	rax				; tmp++
 	jmp	_loop			; loop

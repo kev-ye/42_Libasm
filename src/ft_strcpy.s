@@ -18,10 +18,10 @@ _ft_strcpy:
 	mov rdx, rsi		; tmp_src = src
 
 _loop:
-	mov cl, byte [rdx]	; c = *tmp_src
+	mov cl, byte[rdx]	; c = *tmp_src
 	cmp cl, 0			; if *tmp_src == '\0'
 	jz _return			; jump to _return if true
-	mov byte [rax], cl	; *tmp_dst = c
+	mov byte[rax], cl	; *tmp_dst = c
 	inc rax				; tmp_dst++
 	inc rdx				; tmp_src++
 	jmp _loop			; loop

@@ -17,8 +17,8 @@ The aim of this project is to get familiar with assembly language.
 - [x] ft_strlen
 - [x] ft_strcpy
 - [ ] ft_strcmp
-- [x] ft_write
-- [x] ft_read
+- [ ] ft_write
+- [ ] ft_read
 - [ ] ft_strdup
 
 ## __Register__

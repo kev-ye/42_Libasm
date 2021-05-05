@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/10 17:29:25 by kaye              #+#    #+#              #
-#    Updated: 2021/05/02 18:53:58 by kaye             ###   ########.fr        #
+#    Updated: 2021/05/05 16:50:21 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NA		= nasm
 NAFLAG	= -f macho64
 CC		= clang
-CFLAG	= -Wall -Wextra -Werror
+CFLAG	= -Wall -Wextra -Werror -fsanitize=address
 IFLAG	= -I./inc
 
 # DIRECTORIES
