@@ -23,11 +23,21 @@
 ;
 ; ssize_t	ft_write(int fildes, const void *buf, size_t nbyte);
 
-section .text		; code
+extern ___error				; include errno
 
-global _ft_write	; function name ft_write
+section .text				; code
+
+global _ft_write			; function name ft_write
 
 _ft_write:
-	mov	rax, 0x2000004
+	mov	rax, 0x2000004		; write syscall number
 	syscall
+	jc _errno				; jump to _errno if error at syscall
+	ret
+
+_errno:
+	mov r10, rax			; save the errno value to r10 (a free register)
+	call ___error			; call errno, get result in rax register
+	mov qword[rax], r10		; put the errno value in rax register
+	mov rax, -1				; set -1 as the return value
 	ret

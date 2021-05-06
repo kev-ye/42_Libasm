@@ -8,6 +8,8 @@
 ;	rdi : first argument register
 ;	rsp : stack pointer
 ;	rbp : frame pointer
+;	r9	; fifth argument register
+;	r9	; sixth argument register
 ;
 ;	|---------------> RAX (16-bit) <-----------------|
 ;	|                        |--------> EAX <--------|
@@ -22,3 +24,28 @@
 ;
 ;
 ;	char	*ft_strdup(const char *s1);
+
+extern _ft_strlen
+extern _ft_strcpy
+extern _malloc
+
+section .text			; code
+
+global _ft_strdup		; function name ft_strdup
+
+_ft_strdup:
+	xor rax, rax
+	mov rax, rdi
+
+_cpy:
+	mov rsi, rdi
+	call _ft_strlen
+	add rax, 1
+	mov rdx, rax
+	call _malloc
+	mov rcx, rax
+	call _ft_strcpy
+	ret
+
+; _return:
+; 	ret

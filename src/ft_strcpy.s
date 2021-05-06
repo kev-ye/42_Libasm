@@ -21,26 +21,26 @@
 ;	|---> AH (HH 8-bit) <---|---> AL (LW 8-bit) <---|
 ;
 ;
-; char	*ft_strcpy(char * dst, const char * src);
+;	char	*ft_strcpy(char * dst, const char * src);
 
 section .text				; code
 
 global _ft_strcpy			; function name ft_strcpy
 
 _ft_strcpy:
-	mov rax, rdi			; tmp_dst = dst
-	mov rdx, rsi			; tmp_src = src
+	mov rax, rdi			; hold the dst pointer to tmp_dst (rax)
+	mov rdx, rsi			; hold the src pointer to tmp_src (rdx)
 
 _loop:
-	mov cl, byte[rdx]		; char = *tmp_src
-	cmp cl, 0				; *tmp_src ? '\0'
-	jz _return				; *tmp_src == '\0' -> _return
-	mov byte[rax], cl		; *tmp_dst = char
+	mov cl, byte[rdx]		; get the current *tmp_src value
+	cmp cl, 0				; compare the *tmp_src value with '\0'
+	jz _return				; if true, turn to _return
+	mov byte[rax], cl		; save the *tmp_src value in dst
 	inc rax					; tmp_dst++
 	inc rdx					; tmp_src++
 	jmp _loop				; loop
 
 _return:
-	mov byte[rax], 0		; *tmp_dst = '\0'
-	mov rax, rdi			; tmp_dst = dst
-	ret						; return dst
+	mov byte[rax], 0		; add '\0' at end of the tmp_dst
+	mov rax, rdi			; set the first dst pointer to return value
+	ret
