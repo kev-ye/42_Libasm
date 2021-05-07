@@ -6,14 +6,18 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/10 17:29:25 by kaye              #+#    #+#              #
-#    Updated: 2021/05/05 16:50:21 by kaye             ###   ########.fr        #
+#    Updated: 2021/05/07 18:19:03 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # COMPILATION
 
 NA		= nasm
-NAFLAG	= -f macho64
+ifeq ($(shell uname), Darwin)
+	NAFLAG	= -f macho64
+else ifeq ($(shell uname), Linux)
+	NAFLAG	= -f elf64
+endif
 CC		= clang
 CFLAG	= -Wall -Wextra -Werror -fsanitize=address
 IFLAG	= -I./inc

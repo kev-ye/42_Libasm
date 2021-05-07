@@ -16,10 +16,10 @@ The aim of this project is to get familiar with assembly language.
 
 - [x] ft_strlen
 - [x] ft_strcpy
-- [ ] ft_strcmp
-- [ ] ft_write
-- [ ] ft_read
-- [ ] ft_strdup
+- [x] ft_strcmp
+- [x] ft_write
+- [x] ft_read
+- [x] ft_strdup
 
 ## __Register__
 [__Original__](https://www.codenong.com/cs109851814/)

@@ -34,18 +34,19 @@ section .text			; code
 global _ft_strdup		; function name ft_strdup
 
 _ft_strdup:
-	xor rax, rax
-	mov rax, rdi
+	push rdi			; push (save) s1 value to stack
 
 _cpy:
-	mov rsi, rdi
-	call _ft_strlen
-	add rax, 1
-	mov rdx, rax
+	call _ft_strlen		; rdi already has str value
+	add rax, 1			; add 1 to length
+	mov rdi, rax		; set length value to 1st arg (parameter of malloc)
 	call _malloc
-	mov rcx, rax
+	cmp rax, 0			; check if malloc failed
+	jz _return
+	mov rdi, rax		; set malloc addr to dst register
+	pop rsi				; set src value from stack
 	call _ft_strcpy
-	ret
+	ret					; return the malloc string
 
-; _return:
-; 	ret
+_return:
+	ret					; if malloc failed, return NULL
