@@ -37,19 +37,19 @@ FT_STRCMP:
 	xor rax, rax			; set rax to 0
 	xor rcx, rcx			; set rcx to 0
 
-_loop:
+.loop:
 	mov al, byte[rdi]		; get the current *s1 value
 	mov cl, byte[rsi]		; get the current *s2 value
 	cmp al, 0				; compare *s1 value with '\0'
-	jz _return				; if true, turn to _return
+	jz .return				; if true, turn to _return
 	cmp cl, 0				; compare *s2 value with '\0'
-	jz _return				; if true, turn to _return
+	jz .return				; if true, turn to _return
 	cmp al, cl				; compare *s2 value with *s1 value
-	jne _return				; if false, turn to _return
+	jne .return				; if false, turn to _return
 	inc rdi					; s1++
 	inc rsi					; s2++
-	jmp _loop				; loop
+	jmp .loop				; loop
 
-_return:
+.return:
 	sub rax, rcx			; set the result of *s1 - *s2 to return value
 	ret

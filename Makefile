@@ -86,6 +86,6 @@ $(BUILD):
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.s | $(BUILD)
 	@echo "Compiling $(CYAN_COLOR)$< $(DEFAULT_COLOR)..."
-	$(NA) $(NAFLAG) $< -o $@
+	@$(NA) $(NAFLAG) $< -o $@
 
 .PHONY : all clean fclean re

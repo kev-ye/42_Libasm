@@ -25,28 +25,41 @@
 ;
 ;	char	*ft_strdup(const char *s1);
 
-extern _ft_strlen
-extern _ft_strcpy
-extern _malloc
+%ifdef __LINUX__
+	%define FT_STRDUP ft_strdup
+	%define FT_STRLEN ft_strlen
+	%define FT_STRCPY ft_strcpy
+	%define MALLOC_CALL malloc
+
+%else
+	%define FT_STRDUP _ft_strdup
+	%define FT_STRLEN _ft_strlen
+	%define FT_STRCPY _ft_strcpy
+	%define MALLOC_CALL _malloc
+%endif
+
+extern FT_STRLEN
+extern FT_STRCPY
+extern MALLOC_CALL
 
 section .text			; code
 
-global _ft_strdup		; function name ft_strdup
+global FT_STRDUP		; function name ft_strdup
 
-_ft_strdup:
+FT_STRDUP:
 	push rdi			; push (save) s1 value to stack
 
-_cpy:
-	call _ft_strlen		; rdi already has str value
+.cpy:
+	call FT_STRLEN		; rdi already has str value
 	add rax, 1			; add 1 to length
 	mov rdi, rax		; set length value to 1st arg (parameter of malloc)
-	call _malloc
+	call MALLOC_CALL
 	cmp rax, 0			; check if malloc failed
-	jz _return
+	jz .return
 	mov rdi, rax		; set malloc addr to dst register
 	pop rsi				; set src value from stack
-	call _ft_strcpy
+	call FT_STRCPY
 	ret					; return the malloc string
 
-_return:
+.return:
 	ret					; if malloc failed, return NULL

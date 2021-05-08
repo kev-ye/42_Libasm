@@ -26,12 +26,15 @@
 %ifdef __LINUX__
 	%define FT_WRITE ft_write
 	%define SYS_CALL_WRITE_NUM 0x1
+	%define ERRNO_CALL __errno_location
+
 %else
 	%define FT_WRITE _ft_write
 	%define SYS_CALL_WRITE_NUM 0x2000004
+	%define ERRNO_CALL __error
 %endif
 
-extern ___error						; include errno
+extern ERRNO_CALL					; include errno
 
 section .text						; code
 
@@ -40,12 +43,12 @@ global FT_WRITE						; function name ft_write
 FT_WRITE:
 	mov	rax, SYS_CALL_WRITE_NUM
 	syscall
-	jc _errno						; jump to _errno if error at syscall
+	jc .errno						; jump to _errno if error at syscall
 	ret
 
-_errno:
+.errno:
 	mov r10, rax					; save the errno value to r10 (a free register)
-	call ___error					; call errno, get result in rax register
+	call ERRNO_CALL					; call errno, get result in rax register
 	mov qword[rax], r10				; put the errno value in rax register
 	mov rax, -1						; set -1 as the return value
 	ret
