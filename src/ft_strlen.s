@@ -25,6 +25,7 @@
 
 %ifdef __LINUX__
 	%define FT_STRLEN ft_strlen
+
 %else
 	%define FT_STRLEN _ft_strlen
 %endif

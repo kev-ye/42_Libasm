@@ -31,7 +31,7 @@
 %else
 	%define FT_WRITE _ft_write
 	%define SYS_CALL_WRITE_NUM 0x2000004
-	%define ERRNO_CALL __error
+	%define ERRNO_CALL ___error
 %endif
 
 extern ERRNO_CALL					; include errno

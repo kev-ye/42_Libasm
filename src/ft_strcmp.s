@@ -25,6 +25,7 @@
 
 %ifdef __LINUX__
 	%define FT_STRCMP ft_strcmp
+
 %else
 	%define FT_STRCMP _ft_strcmp
 %endif

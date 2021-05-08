@@ -7,6 +7,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include <stdio.h>
+# define BUFF_SIZE 20
 
 /*
 ** Mandatory part

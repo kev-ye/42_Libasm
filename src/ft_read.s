@@ -27,10 +27,11 @@
 	%define FT_READ ft_read
 	%define SYS_CALL_READ_NUM 0x0
 	%define ERRNO_CALL __errno_location
+
 %else
 	%define FT_READ _ft_read
 	%define SYS_CALL_READ_NUM 0x2000003
-	%define ERRNO_CALL __error
+	%define ERRNO_CALL ___error
 %endif
 
 extern ERRNO_CALL					; include errno

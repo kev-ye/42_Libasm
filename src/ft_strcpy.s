@@ -25,6 +25,7 @@
 
 %ifdef __LINUX__
 	%define FT_STRCPY ft_strcpy
+
 %else
 	%define FT_STRCPY _ft_strcpy
 %endif

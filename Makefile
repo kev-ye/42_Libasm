@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/10 17:29:25 by kaye              #+#    #+#              #
-#    Updated: 2021/05/08 16:57:27 by kaye             ###   ########.fr        #
+#    Updated: 2021/05/08 17:20:40 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ else ifeq ($(shell uname), Linux)
 endif
 CC		= clang
 CFLAG	= -Wall -Wextra -Werror -fsanitize=address
+# CFLAG	= -Wall -Wextra -Werror
 IFLAG	= -I./inc
 
 # DIRECTORIES
