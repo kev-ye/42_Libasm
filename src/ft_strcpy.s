@@ -23,11 +23,17 @@
 ;
 ;	char	*ft_strcpy(char * dst, const char * src);
 
+%ifdef __LINUX__
+	%define FT_STRCPY ft_strcpy
+%else
+	%define FT_STRCPY _ft_strcpy
+%endif
+
 section .text				; code
 
-global _ft_strcpy			; function name ft_strcpy
+global FT_STRCPY			; function name ft_strcpy
 
-_ft_strcpy:
+FT_STRCPY:
 	mov rax, rdi			; hold the dst pointer to tmp_dst (rax)
 	mov rdx, rsi			; hold the src pointer to tmp_src (rdx)
 

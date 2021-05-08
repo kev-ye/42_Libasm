@@ -23,11 +23,17 @@
 ;
 ;	int		ft_strcmp(const char *s1, const char *s2);
 
+%ifdef __LINUX__
+	%define FT_STRCMP ft_strcmp
+%else
+	%define FT_STRCMP _ft_strcmp
+%endif
+
 section .text				; code
 
-global _ft_strcmp			; function name ft_strcmp
+global FT_STRCMP			; function name ft_strcmp
 
-_ft_strcmp:
+FT_STRCMP:
 	xor rax, rax			; set rax to 0
 	xor rcx, rcx			; set rcx to 0
 

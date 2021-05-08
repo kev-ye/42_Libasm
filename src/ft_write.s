@@ -23,17 +23,22 @@
 ;
 ; ssize_t	ft_write(int fildes, const void *buf, size_t nbyte);
 
-%define SYS_DARWIN_WRITE 0x2000004
-%define SYS_LINUX_WRITE 0x1
+%ifdef __LINUX__
+	%define FT_WRITE ft_write
+	%define SYS_CALL_WRITE_NUM 0x1
+%else
+	%define FT_WRITE _ft_write
+	%define SYS_CALL_WRITE_NUM 0x2000004
+%endif
 
 extern ___error						; include errno
 
 section .text						; code
 
-global _ft_write					; function name ft_write
+global FT_WRITE						; function name ft_write
 
-_ft_write:
-	mov	rax, SYS_DARWIN_WRITE
+FT_WRITE:
+	mov	rax, SYS_CALL_WRITE_NUM
 	syscall
 	jc _errno						; jump to _errno if error at syscall
 	ret

@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/10 17:29:25 by kaye              #+#    #+#              #
-#    Updated: 2021/05/07 18:39:13 by kaye             ###   ########.fr        #
+#    Updated: 2021/05/08 16:57:27 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NA		= nasm
 ifeq ($(shell uname), Darwin)
 	NAFLAG	= -f macho64
 else ifeq ($(shell uname), Linux)
-	NAFLAG	= -f elf64
+	NAFLAG	= -f elf64 -D __LINUX__
 endif
 CC		= clang
 CFLAG	= -Wall -Wextra -Werror -fsanitize=address

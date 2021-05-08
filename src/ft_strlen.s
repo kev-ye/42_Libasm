@@ -23,11 +23,17 @@
 ;
 ;	size_t ft_strlen(const char *str)
 
+%ifdef __LINUX__
+	%define FT_STRLEN ft_strlen
+%else
+	%define FT_STRLEN _ft_strlen
+%endif
+
 section .text			; code
 
-global _ft_strlen		; function name ft_strlen	
+global FT_STRLEN		; function name ft_strlen
 
-_ft_strlen:
+FT_STRLEN:
 	mov	rax, rdi		; hold the src pointer to tmp_src (rax)
 
 _loop:

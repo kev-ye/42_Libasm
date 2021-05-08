@@ -23,17 +23,22 @@
 ;
 ; ssize_t	ft_read(int fildes, void *buf, size_t nbyte);
 
-%define SYS_DARWIN_READ 0x2000003
-%define SYS_LINUX_READ 0x0
+%ifdef __LINUX__
+	%define FT_READ ft_read
+	%define SYS_CALL_READ_NUM 0x0
+%else
+	%define FT_READ _ft_read
+	%define SYS_CALL_READ_NUM 0x2000003
+%endif
 
 extern ___error						; include errno
 
 section .text						; code
 
-global _ft_read						; function name ft_read
+global FT_READ						; function name ft_read
 
-_ft_read:
-	mov	rax, SYS_DARWIN_READ
+FT_READ:
+	mov	rax, SYS_CALL_READ_NUM
     syscall
     jc _error						; jump to _errno if error at syscall
     ret
