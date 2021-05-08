@@ -218,7 +218,7 @@ static void	ft_read_multi_test(void)
 		exit(1);
 	}
 	ft_read_test(fd1, fd2, buf_for_read1, buf_for_read2, BUFF_SIZE);
-	ft_read_test(-1, -1, buf_for_read1, buf_for_read2, BUFF_SIZE);
+	ft_read_test(-111, -111, buf_for_read1, buf_for_read2, 0);
 	close(fd1);
 	close(fd2);
 	printf("\n");

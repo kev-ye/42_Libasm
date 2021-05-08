@@ -43,10 +43,18 @@ global FT_WRITE						; function name ft_write
 FT_WRITE:
 	mov	rax, SYS_CALL_WRITE_NUM
 	syscall
-	jc .errno						; jump to _errno if error at syscall
+	%ifdef __LINUX__
+		cmp rax, 0
+		jl .errno					; in linux, the error value return on syscall is negative
+	%else
+		jc .errno					; in macos, the error value return on syscall is positive but it will activate CFLAG
+	%endif
 	ret
 
 .errno:
+	%ifdef __LINUX__
+		neg rax						; errno is postive value, so we turn it to positive; errno is postive value, so we turn it to positive
+	%endif
 	mov r10, rax					; save the errno value to r10 (a free register)
 	call ERRNO_CALL					; call errno, get result in rax register
 	mov qword[rax], r10				; put the errno value in rax register
