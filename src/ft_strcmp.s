@@ -29,19 +29,21 @@ global _ft_strcmp			; function name ft_strcmp
 
 _ft_strcmp:
 	xor rax, rax			; set rax to 0
+	xor rcx, rcx			; set rcx to 0
 
 _loop:
 	mov al, byte[rdi]		; get the current *s1 value
-	cmp al, byte[rsi]		; compare *s2 value with *s1 value
+	mov cl, byte[rsi]		; get the current *s2 value
+	cmp al, 0				; compare *s1 value with '\0'
+	jz _return				; if true, turn to _return
+	cmp cl, 0				; compare *s2 value with '\0'
+	jz _return				; if true, turn to _return
+	cmp al, cl				; compare *s2 value with *s1 value
 	jne _return				; if false, turn to _return
-	cmp byte[rdi], 0		; compare *s1 value with '\0'
-	jz _return				; if true, turn to _return
-	cmp byte[rsi], 0		; compare *s2 value with '\0'
-	jz _return				; if true, turn to _return
 	inc rdi					; s1++
 	inc rsi					; s2++
 	jmp _loop				; loop
 
 _return:
-	sub eax, dword[rsi]		; set the result of *s1 - *s2 to return value
+	sub rax, rcx			; set the result of *s1 - *s2 to return value
 	ret
