@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/10 17:29:25 by kaye              #+#    #+#              #
-#    Updated: 2021/05/08 21:26:06 by kaye             ###   ########.fr        #
+#    Updated: 2021/05/09 11:32:10 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ else ifeq ($(shell uname), Linux)
 	NAFLAG	= -f elf64 -D __LINUX__
 endif
 CC		= clang
-# CFLAG	= -Wall -Wextra -Werror -fsanitize=address
 CFLAG	= -Wall -Wextra -Werror
 IFLAG	= -I./inc
 
@@ -66,6 +65,7 @@ $(NAME): $(OBJ)
 $(MAIN): $(NAME)
 	@echo "Creating $(RED_COLOR) $@ $(DEFAULT_COLOR)..."
 	@$(CC) $(CFLAG) $(IFLAG) $(MAIN_SRC) $(NAME) -o $@
+	@./$(MAIN) 2>/dev/null
 	@echo "$(GREEN_COLOR)Compilation $(YELLOW_COLOR)of $(RED_COLOR)$@ $(BLUE_COLOR)done$(DEFAULT_COLOR)"
 
 all: $(NAME)

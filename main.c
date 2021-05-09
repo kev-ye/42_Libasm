@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:40:48 by kaye              #+#    #+#             */
-/*   Updated: 2021/05/08 21:23:22 by kaye             ###   ########.fr       */
+/*   Updated: 2021/05/09 11:32:19 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,11 +151,9 @@ static int 	ft_write_test(int fd, char *buf, int nbyte)
 	errno = 0;
 	my = ft_write(fd, buf, nbyte);
 	my_errno = errno;
-	printf("\n");
 	errno = 0;
 	rl = write(fd, buf, nbyte);
 	rl_errno = errno;
-	printf("\n");
 	if (my != rl || my_errno != rl_errno)
 	{
 		printf("\033[1;31m❌  Result of ft_write : [%d] errno : [%d] and write : [%d] errno : [%d]are not equal\033[0m\n", my, my_errno, rl, rl_errno);
@@ -168,10 +166,10 @@ static int 	ft_write_test(int fd, char *buf, int nbyte)
 static int	ft_write_multi_test(void)
 {
 	printf("\033[1;33mNormal print test :\033[0m\n");
-	if (!ft_write_test(1, "test", 4))
+	if (!ft_write_test(STDERR_FILENO, "test", 4))
 		return (0);
 	printf("\033[1;33mErrno test :\033[0m\n");
-	if (!ft_write_test(-1, "test" , 0))
+	if (!ft_write_test(STDERR_FILENO, "test" , -1))
 		return (0);
 	printf("\n");
 	return (1);

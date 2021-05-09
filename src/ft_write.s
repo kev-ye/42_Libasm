@@ -41,6 +41,8 @@ section .text						; code
 global FT_WRITE						; function name ft_write
 
 FT_WRITE:
+	xor rcx, rcx
+	xor r11, r11
 	mov	rax, SYS_CALL_WRITE_NUM
 	syscall
 	%ifdef __LINUX__
