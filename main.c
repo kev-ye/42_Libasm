@@ -6,16 +6,22 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:40:48 by kaye              #+#    #+#             */
-/*   Updated: 2021/05/09 11:32:19 by kaye             ###   ########.fr       */
+/*   Updated: 2021/05/12 12:39:23 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
+/* ************************************************************************** */
+/*                                                                            */
+/*                                 MANTADORY                                  */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 ** FT_STRLEN
 */
-static int 	ft_strlen_test(const char *src)
+int 	ft_strlen_test(const char *src)
 {
 	size_t my;
 	size_t rl;
@@ -36,7 +42,7 @@ static int 	ft_strlen_test(const char *src)
 	return (1);
 }
 
-static int	ft_strlen_multi_test(void)
+int	ft_strlen_multi_test(void)
 {
 	if (!ft_strlen_test(""))
 		return (0);
@@ -53,7 +59,7 @@ static int	ft_strlen_multi_test(void)
 /*
 ** FT_STRCPY
 */
-static int 	ft_strcpy_test(char *dst, const char *src, int size)
+int 	ft_strcpy_test(char *dst, const char *src, int size)
 {
 	char *my;
 	char *rl;
@@ -76,7 +82,7 @@ static int 	ft_strcpy_test(char *dst, const char *src, int size)
 	return (1);
 }
 
-static int	ft_strcpy_multi_test(void)
+int	ft_strcpy_multi_test(void)
 {
 	char dst[100];
 
@@ -95,7 +101,7 @@ static int	ft_strcpy_multi_test(void)
 /*
 ** FT_STRCMP
 */
-static int 	ft_strcmp_test(char *s1, char *s2)
+int 	ft_strcmp_test(char *s1, char *s2)
 {
 	int my;
 	int rl;
@@ -116,7 +122,7 @@ static int 	ft_strcmp_test(char *s1, char *s2)
 	return (1);
 }
 
-static int	ft_strcmp_multi_test(void)
+int	ft_strcmp_multi_test(void)
 {
 	if (!ft_strcmp_test("", ""))
 		return (0);
@@ -141,7 +147,7 @@ static int	ft_strcmp_multi_test(void)
 /*
 ** FT_WRITE
 */
-static int 	ft_write_test(int fd, char *buf, int nbyte)
+int 	ft_write_test(int fd, char *buf, int nbyte)
 {
 	int my;
 	int rl;
@@ -163,7 +169,7 @@ static int 	ft_write_test(int fd, char *buf, int nbyte)
 	return (1);
 }
 
-static int	ft_write_multi_test(void)
+int	ft_write_multi_test(void)
 {
 	printf("\033[1;33mNormal print test :\033[0m\n");
 	if (!ft_write_test(STDERR_FILENO, "test", 4))
@@ -178,7 +184,7 @@ static int	ft_write_multi_test(void)
 /*
 ** FT_READ
 */
-static int 	ft_read_test(int fd1, int fd2, char *buf1, char *buf2, int nbyte)
+int 	ft_read_test(int fd1, int fd2, char *buf1, char *buf2, int nbyte)
 {
 	int my;
 	int rl;
@@ -207,7 +213,7 @@ static int 	ft_read_test(int fd1, int fd2, char *buf1, char *buf2, int nbyte)
 	return (1);
 }
 
-static int	ft_read_multi_test(void)
+int	ft_read_multi_test(void)
 {
 	char buf_for_read1[BUFF_SIZE + 1];
 	char buf_for_read2[BUFF_SIZE + 1];
@@ -236,7 +242,7 @@ static int	ft_read_multi_test(void)
 /*
 ** FT_STRDUP
 */
-static int 	ft_strdup_test(char *src)
+int 	ft_strdup_test(char *src)
 {
 	char *my;
 	char *rl;
@@ -261,7 +267,7 @@ static int 	ft_strdup_test(char *src)
 	return (1);
 }
 
-static int	ft_strdup_multi_test(void)
+int	ft_strdup_multi_test(void)
 {
 	if (!ft_strdup_test(""))
 		return (0);
@@ -274,11 +280,82 @@ static int	ft_strdup_multi_test(void)
 	return (1);
 }
 
+/* ************************************************************************** */
+/*                                                                            */
+/*                                   BONUS                                    */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*
+** FT_LIST_SIZE
+*/
+int	ft_list_size_test(t_list *list, int size_check)
+{
+	int size;
+
+	size = 0;
+	size = ft_list_size(list);
+	if (size != size_check)
+	{
+		printf("\033[1;31m❌  Result of ft_list_size with size check are not equal\033[0m\n");
+		return (0);
+	}
+	printf("\033[1;32m✅  ft_list_size PASS\033[0m\n");
+	return (1);
+}
+
+void	free_list(t_list *list1,t_list *list2, t_list *list3, t_list *list4, t_list *list5, t_list *list6)
+{
+	free(list1);
+	free(list2);
+	free(list3);
+	free(list4);
+	free(list5);
+	free(list6);
+}
+
+int	ft_list_size_multi_test(void)
+{
+	t_list *list;
+	t_list *list1 = calloc(1, sizeof(t_list));
+    t_list *list2 = calloc(1, sizeof(t_list));
+    t_list *list3 = calloc(1, sizeof(t_list));
+	t_list *list4 = calloc(1, sizeof(t_list));
+	t_list *list5 = calloc(1, sizeof(t_list));
+	t_list *list6 = calloc(1, sizeof(t_list));
+
+	list = list1;
+	if (!ft_list_size_test(list, 0))
+	{
+		free_list(list1, list2, list3, list4, list5, list6);
+		return (0);
+	}
+	list1->next = list2;
+	list1->next->next = list3;
+	if (!ft_list_size_test(list, 3))
+	{
+		free_list(list1, list2, list3, list4, list5, list6);
+		return (0);
+	}
+	list1->next = list2;
+	list1->next->next = list3;
+	list1->next->next->next = list4;
+	list1->next->next->next->next = list5;
+	list1->next->next->next->next->next = list6;
+	if (!ft_list_size_test(list, 6))
+	{
+		free_list(list1, list2, list3, list4, list5, list6);
+		return (0);
+	}
+	return (1);
+}
+
 /*
 ** MAIN
 */
 int main(void)
 {
+	#if defined (__MANDATORY__)
 	int mandatory;
 	int check;
 
@@ -301,5 +378,21 @@ int main(void)
 		printf("\033[1;31m\n❌  Mandatory failed : \033[0m%d / %d\n", check, mandatory);
 	else
 		printf("\033[1;32m\n✅  Mandatory PASS : \033[0m%d / %d\n", check, mandatory);
+	#endif
+
+	#if defined (__BONUS__)
+	int bonus;
+	int check_bonus;
+
+	bonus = 1;
+	check_bonus = 0;
+	printf("\033[1;36mBonus part :\033[0m\n\n");
+	printf("\033[1;35mft_list_size :\033[0m\n");
+	check_bonus += ft_strdup_multi_test();
+	if (bonus != check_bonus)
+		printf("\033[1;31m\n❌  Bonus failed : \033[0m%d / %d\n", check_bonus, bonus);
+	else
+		printf("\033[1;32m\n✅  Bonus PASS : \033[0m%d / %d\n", check_bonus, bonus);
+	#endif
 	return (0);
 }

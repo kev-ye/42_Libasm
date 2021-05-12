@@ -6,7 +6,7 @@
 #    By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/10 17:29:25 by kaye              #+#    #+#              #
-#    Updated: 2021/05/09 11:32:10 by kaye             ###   ########.fr        #
+#    Updated: 2021/05/12 12:36:38 by kaye             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,11 @@ ifeq ($(shell uname), Darwin)
 else ifeq ($(shell uname), Linux)
 	NAFLAG	= -f elf64 -D __LINUX__
 endif
-CC		= clang
-CFLAG	= -Wall -Wextra -Werror
-IFLAG	= -I./inc
+CC			= clang
+CFLAG		= -Wall -Wextra -Werror
+IFLAG		= -I./inc
+D_MANDATORY	= -D __MANDATORY__
+D_BONUS		= -D __BONUS__
 
 # DIRECTORIES
 
@@ -34,13 +36,16 @@ DIR			:= $(OBJ_DIR)
 
 NAME		:= libasm.a
 MAIN		:= main_test_exec
+MAIN_BONUS	:= main_test_exec_bonus
 MAIN_SRC	:= main.c
 SRC			:= ft_strlen.s \
 			   ft_strcpy.s \
 			   ft_strcmp.s \
 			   ft_write.s \
 			   ft_read.s \
-			   ft_strdup.s
+			   ft_strdup.s \
+			   ft_list_size_bonus.s \
+			   ft_list_push_front_bonus.s
 OBJ			:= $(SRC:%.s=$(OBJ_DIR)/%.o)
 
 # COLORS
@@ -63,14 +68,20 @@ $(NAME): $(OBJ)
 	@echo "$(GREEN_COLOR)Compilation $(YELLOW_COLOR)of $(RED_COLOR)$@ $(BLUE_COLOR)done$(DEFAULT_COLOR)"
 
 $(MAIN): $(NAME)
-	@echo "Creating $(RED_COLOR) $@ $(DEFAULT_COLOR)..."
-	@$(CC) $(CFLAG) $(IFLAG) $(MAIN_SRC) $(NAME) -o $@
+	@$(CC) $(CFLAG) $(IFLAG) $(D_MANDATORY) $(MAIN_SRC) $(NAME) -o $@
 	@./$(MAIN) 2>/dev/null
-	@echo "$(GREEN_COLOR)Compilation $(YELLOW_COLOR)of $(RED_COLOR)$@ $(BLUE_COLOR)done$(DEFAULT_COLOR)"
+
+$(MAIN_BONUS): $(NAME)
+	@$(CC) $(CFLAG) $(IFLAG) $(D_BONUS) $(MAIN_SRC) $(NAME) -o $@
+	@./$(MAIN_BONUS) 2>/dev/null
 
 all: $(NAME)
 
+bonus: all
+
 test: $(MAIN)
+
+test_bonus: $(MAIN_BONUS)
 
 clean:
 	rm -Rf $(BUILD)
@@ -78,6 +89,7 @@ clean:
 fclean: clean
 	rm -Rf $(NAME)
 	rm -Rf $(MAIN)
+	rm -Rf $(MAIN_BONUS)
 
 re: fclean all
 
