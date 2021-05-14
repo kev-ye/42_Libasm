@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:40:48 by kaye              #+#    #+#             */
-/*   Updated: 2021/05/12 12:39:23 by kaye             ###   ########.fr       */
+/*   Updated: 2021/05/14 21:54:24 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,25 @@ int 	ft_strlen_test(const char *src)
 int	ft_strlen_multi_test(void)
 {
 	if (!ft_strlen_test(""))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strlen_test("a simple test"))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strlen_test("test\nwith\tsome\vno\fprintable\rcaracter"))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strlen_test("test with end of string\0this message does not include"))
+	{
+		printf("\n");
 		return (0);
+	}
 	printf("\n");
 	return (1);
 }
@@ -87,13 +99,25 @@ int	ft_strcpy_multi_test(void)
 	char dst[100];
 
 	if (!ft_strcpy_test(dst, "", 100))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strcpy_test(dst, "a simple test", 100))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strcpy_test(dst, "test\nwith\tsome\vno\fprintable\rcaracter", 100))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strcpy_test(dst, "test with end of string\0this message does not include", 100))
+	{
+		printf("\n");
 		return (0);
+	}
 	printf("\n");
 	return (1);
 }
@@ -125,21 +149,45 @@ int 	ft_strcmp_test(char *s1, char *s2)
 int	ft_strcmp_multi_test(void)
 {
 	if (!ft_strcmp_test("", ""))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strcmp_test("test", ""))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strcmp_test("", "test"))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strcmp_test("test", "test"))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strcmp_test("ABC", "abc"))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strcmp_test("abb", "abc"))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strcmp_test("no\nprintable", "no\tprintable"))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strcmp_test("no\nprintable2", "no\0printable2"))
+	{
+		printf("\n");
 		return (0);
+	}
 	printf("\n");
 	return (1);
 }
@@ -173,10 +221,16 @@ int	ft_write_multi_test(void)
 {
 	printf("\033[1;33mNormal print test :\033[0m\n");
 	if (!ft_write_test(STDERR_FILENO, "test", 4))
+	{
+		printf("\n");
 		return (0);
+	}
 	printf("\033[1;33mErrno test :\033[0m\n");
 	if (!ft_write_test(STDERR_FILENO, "test" , -1))
+	{
+		printf("\n");
 		return (0);
+	}
 	printf("\n");
 	return (1);
 }
@@ -229,10 +283,20 @@ int	ft_read_multi_test(void)
 	}
 	printf("\033[1;33mNormal print test :\033[0m\n");
 	if (!ft_read_test(fd1, fd2, buf_for_read1, buf_for_read2, BUFF_SIZE))
+	{
+		close(fd1);
+		close(fd2);
+		printf("\n");
 		return (0);
+	}
 	printf("\033[1;33mErrno test :\033[0m\n");
 	if (!ft_read_test(-111, -111, buf_for_read1, buf_for_read2, 0))
+	{
+		close(fd1);
+		close(fd2);
+		printf("\n");
 		return (0);
+	}
 	close(fd1);
 	close(fd2);
 	printf("\n");
@@ -270,13 +334,26 @@ int 	ft_strdup_test(char *src)
 int	ft_strdup_multi_test(void)
 {
 	if (!ft_strdup_test(""))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strdup_test("a simple test"))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strdup_test("test\nwith\tsome\vno\fprintable\rcaracter"))
+	{
+		printf("\n");
 		return (0);
+	}
 	if (!ft_strdup_test("test with end of string\0this message does not include"))
+	{
+		printf("\n");
 		return (0);
+	}
+	printf("\n");
 	return (1);
 }
 
@@ -297,7 +374,7 @@ int	ft_list_size_test(t_list *list, int size_check)
 	size = ft_list_size(list);
 	if (size != size_check)
 	{
-		printf("\033[1;31m❌  Result of ft_list_size with size check are not equal\033[0m\n");
+		printf("\033[1;31m❌  Result of ft_list_size [%d] with size [%d] check are not equal\033[0m\n", size, size_check);
 		return (0);
 	}
 	printf("\033[1;32m✅  ft_list_size PASS\033[0m\n");
@@ -325,7 +402,7 @@ int	ft_list_size_multi_test(void)
 	t_list *list6 = calloc(1, sizeof(t_list));
 
 	list = list1;
-	if (!ft_list_size_test(list, 0))
+	if (!ft_list_size_test(list, 1))
 	{
 		free_list(list1, list2, list3, list4, list5, list6);
 		return (0);
@@ -345,8 +422,56 @@ int	ft_list_size_multi_test(void)
 	if (!ft_list_size_test(list, 6))
 	{
 		free_list(list1, list2, list3, list4, list5, list6);
+		printf("\n");
 		return (0);
 	}
+	printf("\n");
+	return (1);
+}
+
+/*
+** FT_LIST_PUSH_FRONT
+*/
+int	ft_list_push_front_test(t_list *list, int data_check)
+{
+	if ((int)list->data != data_check)
+	{
+		printf("\033[1;31m❌  Result of data [%d] with data_check [%d] are not equal\033[0m\n", (int)list->data, data_check);
+		return (0);
+	}
+	printf("\033[1;32m✅  ft_list_push_front PASS\033[0m\n");
+	return (1);
+}
+
+int	ft_list_push_front_multi_test(void)
+{
+	t_list *list = NULL;
+
+	ft_list_push_front(&list, (void *)(intptr_t)1);
+	if (!ft_list_push_front_test(list, 1))
+	{
+		free(list);
+		printf("\n");
+		return (0);
+	}
+	ft_list_push_front(&list, (void *)(intptr_t)2);
+	if (!ft_list_push_front_test(list, 2))
+	{
+		free(list->next);
+		free(list);
+		printf("\n");
+		return (0);
+	}
+	ft_list_push_front(&list, (void *)(intptr_t)3);
+	if (!ft_list_push_front_test(list, 3))
+	{
+		free(list->next->next);
+		free(list->next);
+		free(list);
+		printf("\n");
+		return (0);
+	}
+	printf("\n");
 	return (1);
 }
 
@@ -375,24 +500,26 @@ int main(void)
 	printf("\033[1;35mft_strdup :\033[0m\n");
 	check += ft_strdup_multi_test();
 	if (mandatory != check)
-		printf("\033[1;31m\n❌  Mandatory failed : \033[0m%d / %d\n", check, mandatory);
+		printf("\033[1;31m❌  Mandatory failed : \033[0m%d / %d\n", check, mandatory);
 	else
-		printf("\033[1;32m\n✅  Mandatory PASS : \033[0m%d / %d\n", check, mandatory);
+		printf("\033[1;32m✅  Mandatory PASS : \033[0m%d / %d\n", check, mandatory);
 	#endif
 
 	#if defined (__BONUS__)
 	int bonus;
 	int check_bonus;
 
-	bonus = 1;
+	bonus = 2;
 	check_bonus = 0;
 	printf("\033[1;36mBonus part :\033[0m\n\n");
 	printf("\033[1;35mft_list_size :\033[0m\n");
-	check_bonus += ft_strdup_multi_test();
+	check_bonus += ft_list_size_multi_test();
+	printf("\033[1;35mft_list_push_front :\033[0m\n");
+	check_bonus += ft_list_push_front_multi_test();
 	if (bonus != check_bonus)
-		printf("\033[1;31m\n❌  Bonus failed : \033[0m%d / %d\n", check_bonus, bonus);
+		printf("\033[1;31m❌  Bonus failed : \033[0m%d / %d\n", check_bonus, bonus);
 	else
-		printf("\033[1;32m\n✅  Bonus PASS : \033[0m%d / %d\n", check_bonus, bonus);
+		printf("\033[1;32m✅  Bonus PASS : \033[0m%d / %d\n", check_bonus, bonus);
 	#endif
 	return (0);
 }
