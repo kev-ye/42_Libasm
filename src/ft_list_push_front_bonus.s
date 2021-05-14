@@ -50,9 +50,8 @@ section .text				; code
 global FT_LIST_PUSH_FRONT	; function name ft_list_push_front
 
 FT_LIST_PUSH_FRONT:
-	; push rbp				; save current stack frame ptr (function beginning)
-	; mov rbp, rsp			; save current stack ptr in rbp
-	push rsp
+	push rbp				; save current stack frame ptr (function beginning)
+	mov rbp, rsp			; save current stack ptr in rbp
 
 	push rdi				; push (save) *begin_list value at stack
 	push rsi				; push (save) *data value at stack
@@ -69,7 +68,6 @@ FT_LIST_PUSH_FRONT:
 	mov [rdi], rax			; set the new list ptr to *begin_list
 
 .return:
-	; mov rsp, rbp			; get back initial stack ptr
-	; pop rbp					; get back stack frame ptr
-	pop rsp
+	mov rsp, rbp			; get back initial stack ptr
+	pop rbp					; get back stack frame ptr
 	ret
