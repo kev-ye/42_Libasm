@@ -6,7 +6,7 @@
 /*   By: kaye <kaye@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:40:48 by kaye              #+#    #+#             */
-/*   Updated: 2021/05/14 21:54:24 by kaye             ###   ########.fr       */
+/*   Updated: 2021/05/16 19:48:28 by kaye             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,7 +255,7 @@ int 	ft_read_test(int fd1, int fd2, char *buf1, char *buf2, int nbyte)
 	buf1[nbyte] = '\0';
 	my_errno = errno;
 	errno = 0;
-	rl = ft_read(fd2, buf2, nbyte);
+	rl = read(fd2, buf2, nbyte);
 	buf2[nbyte] = '\0';
 	rl_errno = errno;
 	if (my != rl || my_errno != rl_errno || ((buf1 && buf2) && strcmp(buf1, buf2) != 0))

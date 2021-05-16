@@ -31,18 +31,6 @@
 	%define MALLOC_CALL _malloc
 %endif
 
-; void ft_list_push_front(t_list **begin_list, void *data)
-; {
-;     t_list *element;
-
-;     if ((element = ft_create_elem(data))) // Verify if all of the element are created.
-;     {
-;         if (*begin_list)
-;             element->next = *begin_list;
-;         *begin_list = element;
-;     }
-; }
-
 extern MALLOC_CALL
 
 section .text				; code
